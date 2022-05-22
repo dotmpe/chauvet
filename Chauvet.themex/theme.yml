@@ -1,0 +1,330 @@
+version: 0.0.1-dev
+description: Bright orange
+author: Hari Seldon
+colorSpaceName: sRGB
+
+themes:
+  - name: Chauvet 256 dark
+    uuid: a2584019-ef05-4989-b06a-905edfbd1f06
+    baseColor: dark
+    colors:
+      Gold1:             ffd700
+      DarkOrange:        ff8700
+      LightGoldenrod2:   d7d787
+      Orange3:           d78700
+      DarkOrange3a:      af5f00
+      Yellow4:           87af00
+      DarkOrange3b:      75f000
+
+      Khaki3:            d7d75f
+      LightSlateGrey:    8787af
+      LightSlateBlue:    8787ff
+      SkyBlue2:          87afff
+      Cornsilk1:         ffffd7
+
+      Grey3: 080808
+      Grey7: 121212
+      Grey11: 1c1c1c
+      Grey19: 303030
+      Grey23: 3a3a3a
+      Grey27: 444444
+      Grey30: 4e4e4e
+      Grey35: 585858
+      Grey39: 626262
+      Grey42: 6c6c6c
+      Grey46: 767676
+      Grey50: 808080
+      Grey54: 8a8a8a
+      Grey58: 949494
+      Grey62: 9e9e9e
+      Grey66: a8a8a8
+      Grey70: b2b2b2
+      Grey74: bcbcbc
+      Grey78: c6c6c6
+      Grey82: d0d0d0
+      Grey85: dadada
+      Grey89: e4e4e4
+      Grey93: eeeeee
+      Grey100: ffffff
+
+      comment:           .Grey50
+
+    settings:
+      background:        .Grey7
+      caret:             .Grey3
+      foreground:        .Grey78
+      invisibles:        .Grey27
+      lineHighlight:     .Gold1
+      selection:         .DarkOrange
+      comment:           .Grey50
+
+rules:
+
+  - name: Constant
+    scope: constant
+    color: .LightSlateBlue
+
+  - name: Keyword
+    scope: keyword
+    color: .LightSlateGrey
+
+  - name: String
+    scope: string
+    color: .Yellow4
+
+  - name: Number
+    scope: constant.numeric
+    color: .SkyBlue2
+
+  - name: Variable
+    scope: variable
+    color: .DarkOrange
+
+  - name: Entity
+    scope: entity
+    color: .Grey100
+    bold: true
+
+  - name: Storage
+    scope: storage
+    color: .LightSlateBlue
+
+  - name: Control keyword
+    scope: keyword.control
+    color: .DarkOrange3a
+
+  - name: Storage type
+    scope: storage.type
+    color: .LightSlateGrey
+    bold: true
+
+  - name: Operator
+    scopes:
+      - keyword.operator
+      - operator.annotation.type.keyword
+      - var.expr.primitive.annotation.type.keyword.meta
+    color: .LightSlateGrey
+
+  - name: Logical Operator
+    scope: logical.operator.meta
+    color: .LightSlateBlue
+
+  - name: Built-in constant
+    scope: constant.language
+    color: .LightSlateBlue
+
+  - name: User-defined constant
+    scopes:
+      - constant.character
+      - constant.other
+    color: .LightSlateBlue
+
+  - name: Function
+    scope: entity.name.function
+    color: .Khaki3
+    bold: false
+
+  - name: Function argument
+    scopes:
+    - variable.parameter
+    - function.parameters.entity.name.meta
+    color: .Grey78
+
+  - name: Module Name
+    scopes:
+      - module.meta
+      - function.object.block.variable.meta
+    color: .DarkOrange
+
+  - name: Class property
+    scope: property.field.declaration.class.meta
+    color: .Khaki3
+
+  - name: Inherited Class
+    scope: entity.other.inherited-class
+    color: .Khaki3
+
+  - name: Attribute name
+    scope: entity.other.attribute-name
+    color: .Grey74
+
+# Braces {{{
+
+  - name: Braces
+    scopes:
+      - bracket.php
+      - meta.brace
+      - meta.property-list.scss
+    color: .Grey39
+
+  - name: Other braces
+    scopes:
+      - punctuation.section
+      - punctuation.terminator
+      - punctuation.definition
+    color: .Grey46
+
+# }}}
+#
+# Punctuation {{{
+
+  - name: Punctuation
+    scopes:
+      - punctuation
+    color: .Orange3
+
+# }}}
+#
+# XXX: included vim scheme for comparison only
+# VIM {{{
+
+  - name: Vim Normal
+    scopes:
+    - vim.hi.Normal
+    color: .Grey78
+
+  - name: Vim NonText
+    scopes:
+    - vim.hi.NonText
+    color: .Grey39
+
+  - name: Vim LineNr
+    scopes:
+    - vim.hi.LineNr
+    color: .Grey30
+
+  - name: Vim StatusLine
+    scopes:
+    - vim.hi.StatusLine
+    color: .Grey35
+
+
+  - name: Vim Folded
+    scopes:
+    - vim.hi.Folded
+    color: .Grey19
+    background: Gold1
+
+
+  - name: Vim Title
+    scopes:
+    - vim.hi.Title
+    color: .DarkOrange
+
+  - name: Vim Visual
+    scopes:
+    - vim.hi.Visual
+    color: .LightGoldenrod2
+
+  - name: Vim ColorColumn
+    scopes:
+    - vim.hi.ColorColumn
+    color: .Grey19
+
+  - name: Vim SignColumn
+    scopes:
+    - vim.hi.SignColumn
+    color: .Cornsilk1
+
+
+  - name: Vim Constant
+    scopes:
+    - vim.hi.Constant
+    color: .LightSlateBlue
+
+  - name: Vim String
+    scopes:
+    - vim.hi.String
+    color: .Yellow4
+
+  - name: Vim Identifier
+    scopes:
+    - vim.hi.Identifier
+    color: .DarkOrange
+
+  - name: Vim Function
+    scopes:
+    - vim.hi.Function
+    color: .Khaki3
+
+  - name: Vim Type
+    scopes:
+    - vim.hi.Type
+    color: .LightSlateBlue
+
+  - name: Vim Statement
+    scopes:
+    - vim.hi.Statement
+    color: .DarkOrange3a
+
+  - name: Vim Keyword
+    scopes:
+    - vim.hi.Keyword
+    color: .LightSlateGrey
+
+  - name: Vim PreProc
+    scopes:
+    - vim.hi.PreProc
+    color: .LightGoldenrod2
+
+  - name: Vim Number
+    scopes:
+    - vim.hi.Number
+    color: .SkyBlue2
+
+  - name: Vim Special
+    scopes:
+    - vim.hi.Special
+    color: .Orange3
+
+  - name: Vim Search
+    scopes:
+    - vim.hi.Search
+    color: .Gold1
+
+  - name: Vim IncSearch
+    scopes:
+    - vim.hi.IncSearch
+    color: .DarkOrange
+
+# }}}
+#
+# CSS {{{
+
+  - name: CSS selector
+    scopes:
+    - meta.selector.css
+    color: .Grey62
+
+  - name: CSS Tag selector
+    scope: entity.name.tag.css
+    color: .DarkOrange
+
+  - name: CSS ID selector
+    scope: entity.other.attribute-name.id.css
+    color: .LightSlateBlue
+
+  - name: CSS Class selector
+    scope: entity.other.attribute-name.class.css
+    color: .Orange3
+
+  - name: CSS Property list
+    scope: meta.property-list.css
+    color: .Grey50
+
+  - name: CSS Property name
+    scopes:
+    - meta.property-list.css meta.property-name.css
+    color: .Grey35
+
+  - name: CSS Property name type
+    scopes:
+    - meta.property-list.css meta.property-name.css support.type.property-name.css
+    color: .LightSlateGrey
+
+  - name: CSS Property value
+    scope: meta.property-value.css
+    color: .Grey78
+
+# }}}
+#

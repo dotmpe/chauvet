@@ -1,0 +1,3 @@
+[submodule "chauvet-vim"]
+	path = chauvet-vim
+	url = git@github.com:dotmpe/chauvet-vim.git

@@ -1,0 +1,50 @@
+! Extended rgb.txt file.
+! Name field is followed by:
+! - xterm-256 number (if applicable),
+! - hex notation,
+! - comment
+!
+! TODO: rename colors to something sensible.
+!
+!  1 Red
+!  9 Bright red
+
+135 135 175	Light slate gray	8787af	103
+135 135 255	Light slate blue	8787ff	105
+135 175 0	Yellow4	87af00	106
+175 95 0	DarkOrange3a	af5f00	130
+135 175 255	SkyBlue2	87afff	111
+117 240 0	DarkOrange3b	75f000	166
+215 135 0	Orange 3	d78700	172
+215 215 95	Khaki 3	d7d75f	185
+215 215 135	LightGoldenrod2	d7d787	186
+255 135 0	DarkOrange	ff8700	208
+255 215 0	Gold1	ffd700	220
+255 255 215	Cornsilk1	ffffd7	230
+
+8 8 8	Grey3	080808	232
+18 18 18	Grey7	121212	233
+28 28 28	Grey11	1c1c1c	234
+48 48 48	Grey19	303030	236
+58 58 58	Grey23	3a3a3a	237
+68 68 68	Grey27	444444	238
+78 78 78	Grey30	4e4e4e	239
+88 88 88	Grey35	585858	240
+98 98 98	Grey39	626262	241
+108 108 108	Grey42	6c6c6c	242
+118 118 118	Grey46	767676	243
+128 128 128	Grey50	808080	244
+138 138 138	Grey54	8a8a8a	245
+148 148 148	Grey58	949494	246
+158 158 158	Grey62	9e9e9e	247
+168 168 168	Grey66	a8a8a8	248
+178 178 178	Grey70	b2b2b2	249
+188 188 188	Grey74	bcbcbc	250
+198 198 198	Grey78	c6c6c6	251
+208 208 208	Grey82	d0d0d0	252
+218 218 218	Grey85	dadada	253
+228 228 228	Grey89	e4e4e4	254
+238 238 238	Grey93	eeeeee	255
+255 255 255	Grey100	ffffff	231
+
+!
