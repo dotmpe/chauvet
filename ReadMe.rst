@@ -12,7 +12,11 @@ Status: vim and tmux config files should be usable.
 - `Tmux statusbar <chauvet-tmux>`_
 
 Focus is on 256 colorscheme, current palette is in rgb.txt.
-Would like to define 4-bit sRGB and work in LAB space but need some tools.
+Would like to define true 4-bit sRGB and work from LAB space definitions but need some tools.
+
+Best format to write style rules is ofcourse CSS.
+Using a SASS subset because that is easy to process
+TODO: move rules to Chauvet.sass
 
 .. _Powerline extra symbols: https://github.com/ryanoasis/powerline-extra-symbols
 .. _Nerd fonts: https://nerdfonts.com
