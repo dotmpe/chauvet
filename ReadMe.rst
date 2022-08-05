@@ -6,18 +6,27 @@ A bright orange color theme.
 
 These theme files use fonts patched for `Powerline extra symbols` (see `NERD fonts`_).
 
-Status: vim and tmux config files should be usable.
+Status: under development.
+
+The Vim and Tmux config files should be usable.
 
 - `Vim colorscheme <chauvet-vim>`_
 - `Tmux statusbar <chauvet-tmux>`_
 
-Focus is on 256 colorscheme, current palette is in rgb.txt.
-Would like to define true 4-bit sRGB and work from LAB space definitions but need some tools.
+More is in the making.
 
-Best format to write style rules is ofcourse CSS.
-Using a SASS subset because that is easy to process
-TODO: move rules to Chauvet.sass
+Best format to write style rules, is of course CSS.
+I hope use a CSS or SASS subset for configuration, and some simple template
+format to generate application specific color themes without any other
+dependencies than a shell.
+
+Also I want to convert colors according to LAB\ [#]_ (and other human-perception
+models), probably using Python, to generate variant color schemes on Chauvet
+and possibly others.
+
+See Hacking.rst for current development notes.
 
 .. _Powerline extra symbols: https://github.com/ryanoasis/powerline-extra-symbols
 .. _Nerd fonts: https://nerdfonts.com
+.. [#] <https://legacy.imagemagick.org/Usage/color_basics/#colorspace_LAB>
 ..

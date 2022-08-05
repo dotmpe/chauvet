@@ -1,9 +1,16 @@
 import sys
 
-if __name__ == '__main__':
+def is_greyshade (r, g, b):
+    return (r == g == b)
 
-    #fl = open('rgb.txt','a+')
-    fl = open('rgb.txt','r')
+if __name__ == '__main__':
+    args = sys.argv[1:]
+    if len(args) > 0:
+        fn = args.pop(0)
+    else:
+        fn = 'rgb.txt'
+
+    fl = open(fn,'r')
     lines = fl.readlines()
 
     for line in lines:
@@ -45,10 +52,34 @@ if __name__ == '__main__':
                       rgb_dec[i], rgb_hex[i] ),
                           file=sys.stderr)
 
+      if is_greyshade(*rgb_dec):
+          xterm = ( '' )
+      else:
+          xterm = sum(map(int,[ 16,
+                      ((rgb_dec[0]-55)/40) * 36,
+                      ((rgb_dec[1]-55)/40) * 6,
+                      ((rgb_dec[2]-55)/40) ]))
+          if xterm != cnum:
+              print('TODO: update cnum column from %s to %s' % (cnum, xterm))
+
+      if is_greyshade(*rgb_dec):
+          urwid = ( '' )
+      else:
+          # XXX:
+          um = [0,6,8,0xa,0xd,0xf]
+          urwid = "".join(map(lambda v:hex(v)[2:],map(lambda i: um[int(i)],[
+                      ((rgb_dec[0]-55)/40),
+                      ((rgb_dec[1]-55)/40),
+                      ((rgb_dec[2]-55)/40) ])))
+
+
       print("\t".join([
             " ".join(map(str,rgb_dec)),
             name,
             "".join(map(lambda v: hex(v)[2:].ljust(2,'0'),rgb_hex)),
-            str(cnum)
+            str(cnum),
+            str(urwid),
+            str(xterm),
+
           ]))
 #
