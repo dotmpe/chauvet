@@ -274,7 +274,7 @@ typeTpl () # [tab] ~ <Sh-Tpl> [<Tpl-Type>]
 
 typeThemex () # ~
 {
-	typeTpl "tools/sh/echo-e/themex.tpl" Echo
+	typeTpl "tools/sh/echo-e/themex.yaml.tpl" Echo
 }
 
 test $# -gt 0 || set -- readTab

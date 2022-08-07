@@ -1,9 +1,8 @@
 /**
- * Nordic rofi theme
- * Adapted by undiabler <undiabler@gmail.com>
- *
- * Nord Color palette imported from https://www.nordtheme.com/
- *
+ * Quick hack adaption of Nordic rofi theme into something different for
+ * Chauvet. It is a bit too playful for my current i3wm setup but at least the
+ * colors match.
+ * XXX: and it might be nice to write some SASS rules for it
  */
 
 * {
