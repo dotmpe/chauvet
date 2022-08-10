@@ -7,6 +7,7 @@ A bright orange color theme.
 These theme files use fonts patched for `Powerline extra symbols` (see `NERD fonts`_).
 
 Status: under development.
+See `chauvet-vim </dotmpe/chauvet-vim>`__ for the current visual impression.
 
 The Vim and Tmux config files should be usable.
 
