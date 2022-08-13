@@ -1,8 +1,7 @@
 ! @version: 0.0.1-dev
 ! @author: .mpe
-! @name: Chauvet 256 dark
+! @name: Chauvet 256
 ! @description: Bright orange
-! @baseColor: dark
 ! @colorSpaceName: sRGB
 ! @UUID: a2584019-ef05-4989-b06a-905edfbd1f06
 
@@ -12,25 +11,28 @@
 ! - xterm-256 number (if applicable),
 ! - comment/description
 !
-! TODO: rename colors to something sensible.
-!
-!  1 Red
-!  9 Bright red
+! TODO: rename colors to something more sensible?
 
-255 255 215	Cornsilk1	ffffd7	230
-255 215 0	Gold1	ffd700	220
-255 135 0	DarkOrange	ff8700	208
-215 215 135	LightGoldenrod2	d7d787	186
+
+! Colors between dark and light Vim colorscheme are the same except bg
+
+- - - - - 1
+- - - - - 9
+135 135 175	LightSlateGray	8787af	103
+135 135 255	LightSlateBlue	8787ff	105
+135 175 0	Yellow4	87af00	106
+135 175 255	SkyBlue2	87afff	111
+175 95 0	DarkOrange3a	af5f00	130
+117 240 0	DarkOrange3b	75f000	166
 215 135 0	Orange3	d78700	172
 215 215 95	Khaki3	d7d75f	185
-175 95 0	DarkOrange3a	af5f00	130
-135 175 0	Yellow4	87af00	106
-117 240 0	DarkOrange3b	75f000	166
+215 215 135	LightGoldenrod2	d7d787	186
+255 135 0	DarkOrange	ff8700	208
+255 215 0	Gold1	ffd700	220
+255 255 215	Cornsilk1	ffffd7	230
 
-135 135 255	LightSlateBlue	8787ff	105
-135 135 175	LightSlateGray	8787af	103
-135 175 255	SkyBlue2	87afff	111
 
+! Grey palette in 256colors
 8 8 8	Grey3	080808	232
 18 18 18	Grey7	121212	233
 28 28 28	Grey11	1c1c1c	234
@@ -56,4 +58,4 @@
 238 238 238	Grey93	eeeeee	255
 255 255 255	Grey100	ffffff	231
 
-!
+! ex:ft=lesst-txt:
