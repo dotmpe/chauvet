@@ -149,10 +149,11 @@ grepShProperties ()
 readTab () # ~ # Read SASS to an intermediate, line-based triples format 'tab'
 {
   l=0
-  while IFS= read line
+  while IFS= read -r line
   do
-    l=$(( $l + 1 ))
+    l=$(( l + 1 ))
 
+    #shellcheck disable=2116 # Skip empty lines
     test -n "$(echo $line)" || continue
     debug "$l: '$line'"
 
@@ -161,6 +162,7 @@ readTab () # ~ # Read SASS to an intermediate, line-based triples format 'tab'
 
     debug "a"
 
+    #shellcheck disable=2116 # Collapse whitespace
     case "$(echo $line)" in
 
       ( "// @"* )
@@ -177,7 +179,7 @@ readTab () # ~ # Read SASS to an intermediate, line-based triples format 'tab'
         continue ;;
 
       ( *": "* )
-        line=$(echo "$line" | cut -c$(( $ind + 1 ))-)
+        line=$(echo "$line" | cut -c$(( ind + 1 ))-)
         test -n "$g" && {
           I=${is//* }
           finish_groups
