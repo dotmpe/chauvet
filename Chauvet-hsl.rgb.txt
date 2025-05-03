@@ -1,0 +1,30 @@
+! XXX: just ordered by hue
+
+! 0.0
+215 0 0		Red3	D70000	151	160
+! 0.06
+255 95 0		OrangeRed1	FF5F00	201	202
+! 0.07
+215 95 0		DarkOrange3b	D75F00	165	166
+! 0.09
+255 135 0		DarkOrange	FF8700	207	208
+175 95 0		DarkOrange3	AF5F00	129	130
+! 0.10
+215 135 0		Orange3	D78700	171	172
+! 0.14
+255 215 0		Gold1	FFD700	219	220	Bold warm yellow
+! 0.17
+255 255 215		Cornsilk1	FFFFD7	230	230	Pale beige
+215 215 135		LightGoldenrod2	D7D787	186	186
+215 215 95		Khaki3	D7D75F	185	185
+135 135 95		Wheat4	87875F	101	101
+215 215 0		Yellow3	D7D700	183
+135 175 0		Yellow4	87AF00	105	106	Warm green
+! 0.25
+135 175 95		DarkOliveGreen3	87AF5F	107	107
+! 0.61
+135 175 255		SkyBlue2	87AFFF	111	111
+! 0.67
+135 135 255		LightSlateBlue	8787FF	105	105	Blue-saturated purple
+135 135 175		LightSlateGray	8787AF	103	103	Blue-green tinted medium grey
+

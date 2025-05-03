@@ -1,0 +1,16 @@
+0 0 0	Black	000000		color0
+128 0 0	Maroon	800000		color0
+0 128 0	Green	008000		color0
+128 128 0	Olive	808000		color0
+0 0 128	Navy	000080		color0
+128 0 128	Purple	800080		color5
+0 128 128	Teal	008080		color6
+192 192 192	Silver	C0C0C0		color7
+128 128 128	Grey	808080		color8
+255 0 0	Red	FF0000		color9
+0 255 0	Lime	00FF00		color10
+255 255 0	Yellow	FFFF00		color11
+0 0 255	Blue	0000FF		color12
+255 0 255	Fuchsia	FF00FF		color13
+0 255 255	Aqua	00FFFF		color14
+255 255 255	White	FFFFFF		color15

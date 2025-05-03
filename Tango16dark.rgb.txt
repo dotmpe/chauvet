@@ -1,0 +1,16 @@
+46 52 54	AluminiumDark3	2E3436	8		color0
+204 0 0	ScarletRedMedium	CC0000	141		color1
+78 154 6	ChameleonDark	4E9A06	49		color2
+196 160 0	ButterDark	C4A000	156		color3
+52 101 164	SkyBlueMedium	3465A4	22		color4
+117 80 123	PlumMedium	75507B	75		color5
+6 152 154	CyanMedium	06989A	-12		color6
+186 189 182	AluminiumLight1	BABDB6	156		color7
+85 87 83	AluminiumDark2	555753	47		color8
+239 41 41	ScarletRedLight	EF2929	179		color9
+138 226 52	ChameleonLight	8AE234	115		color10
+252 233 79	ButterLight	FCE94F	219		color11
+114 159 207	SkyBlueLight	729FCF	87		color12
+173 127 168	PlumLight	AD7FA8	134		color13
+52 226 226	CyanLight	34E2E2	43		color14
+238 238 236	AluminiumLight3	EEEEEC	211		color15

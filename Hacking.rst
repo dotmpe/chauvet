@@ -1,6 +1,5 @@
 Dev notes
 =========
-- Main color definitions in Chauvet.txt
 - TODO: hope to move 'rules' (to define app themes) all to Chauvet.sass
 - Focus is on 256 color compat, want dark and light variant eventually.
 - Not sure how to get from sRGB to LAB and back.
@@ -136,8 +135,6 @@ Aside from that I think echo-e or cat-e templates should allow for the
 same functionality.
 
 ----
-
-XXX: not sure yet about how/where RGBA has its use
 
 TODO: using name attribute (among others) in SASS rules,
 which are for sure not DOM/CSS standards compatible fields.

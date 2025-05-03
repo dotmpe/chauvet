@@ -10,16 +10,16 @@ writeSass () # ~
   local started=
   true "${namepad:=20}"
   echo "// sass-theme"
-  while IFS=$'\t\n' read rgb name hex n
+  while IFS=$'\t\n' read -r rgb name hex tnum
   do
-    test -n "$(echo $rgb $name $hex $n)" || {
+    [ -n "$rgb" ] || {
       echo
       continue
     }
 
     case "$rgb $name" in
       ( "! @"* )
-        echo $rgb $name $hex $n | sed 's/\! @\(.*\): \(.*\)$/\/\/ @\1: \2/'
+        echo $rgb $name $hex $tnum | sed 's/\! @\(.*\): \(.*\)$/\/\/ @\1: \2/'
         continue ;;
       ( "!"* ) continue ;;
     esac
