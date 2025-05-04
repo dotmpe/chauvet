@@ -38,4 +38,4 @@ $(for c in ${!tm__rule__*}
 EOM
   done)
 \""
-# ex:ft=sh:
+# ex:ft=bash:

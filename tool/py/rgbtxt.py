@@ -18,8 +18,12 @@ if __name__ == '__main__':
     else:
         datain = open(fn, 'r')
 
-    data = read_rgbtxt_datalines_fl(datain)
+    data = read_rgbtxt_datalines_fl(datain, keep_comments=True)
     for fields in data:
+        if len(fields) and fields[0] and fields[0] == '!':
+            print(fields)
+            continue
+
         rgb_dec = fields[0]
 
         if not rgb_dec:

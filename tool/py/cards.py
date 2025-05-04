@@ -9,6 +9,11 @@ from colorsys import rgb_to_hls
 from chauvettk.color import rgb_norm, rgb_to_lab
 from chauvettk.rgbtxt import read_rgbtxt_tsv_dict_fl
 
+
+def fstr(template):
+    return eval(f'f"""{template}"""')
+
+
 # Output size (excluding padding)
 
 title_h = 28
@@ -43,16 +48,17 @@ if not outputfile:
     outname = 'chart'
     outputfile = outname+'.svg'
 else:
-    outname = outputfile.split('.')[0]
+    outname = outputfile.split('/')[-1].split('.')[0]
 
 datain = sys.stdin
 palette = read_rgbtxt_tsv_dict_fl(datain)
 count = len(palette)
 label = os.getenv('LABEL', None)
 if not label:
-    title = os.getenv('TITLE', f"Palette {outname} ({count} swatches)")
-    dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    label = title+' '+dt
+    title = fstr(os.getenv('TITLE_FMT', "Palette {outname}"))
+    isodate = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    label = fstr(os.getenv('LABEL_FMT',
+                           "{title} ({count} swatches) - {isodate}"))
 
 dim_w, dim_h = w+(2*padd), h+(2*padd)
 

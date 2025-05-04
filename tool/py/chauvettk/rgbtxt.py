@@ -14,7 +14,7 @@ def rgbtxt_autofill():
     pass
 
 
-def read_rgbtxt_datalines_fl(datain):
+def read_rgbtxt_datalines_fl(datain, keep_comments=False):
     """
     Read using plain Python, returns row-tuples.
     """
@@ -23,7 +23,9 @@ def read_rgbtxt_datalines_fl(datain):
     for line in datain.readlines():
         ln += 1
         if not len(line.strip()) or line[0] == '!':
-            continue
+            if line[0] == '!' and keep_comments:
+                palette.append(line.strip())
+                continue
         cols = line.rstrip().split('\t')
         if len(cols) > 2 and not cols[1]:
             del cols[1]

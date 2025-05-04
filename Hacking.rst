@@ -1,8 +1,63 @@
 Dev notes
 =========
-- TODO: hope to move 'rules' (to define app themes) all to Chauvet.sass
-- Focus is on 256 color compat, want dark and light variant eventually.
-- Not sure how to get from sRGB to LAB and back.
+
+Goal: make color theming more easy.
+
+Objectives
+----------
+- I/O with common formats:
+
+  - X11 rgb.txt file
+  - TextMate support (and Sublime and other editors)
+
+Dependencies
+------------
+- ``pouyakary/themeX`` for tmTheme (Visual Studio/Sublime/TextMate) highlight
+  template conversions::
+
+    npm install -g themex
+
+- Python ``colormath`` and ``svgwrite``::
+
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip install colormath svgwrite
+
+Tools
+-----
+::
+
+  redo -k
+
+Status
+------
+- sass.sh was never complete/bugfree. So need to review current setup for
+  output templates as well, and there is no real dist.
+
+- Using RGB tab-separated files to group schemes. Not exactly like X11 rgb.txt
+  that uses whitespace for column formatting but pre-processing that is easy
+  enough.
+
+- Current Chauvet is a selection from such X11 color set. Want to plot colors
+  on diagrams (ie. LAB) and then select Chauvet colors in a more systematic way
+  later. Current selection doesnt match perfectly to my liking and feels a bit
+  awkward at times.
+
+- SASS tools are bit of an experimental hack (shell processing) bc I wanted
+  minimal deps at first, or in the basis.
+
+- Initial redo setup is still simple, but applying parameters could use some
+  rule system as well. Something to keep in mind when looking at SASS/YAML et
+  al for better metadata.
+
+  Should trash Makefile as its an arcane format.
+
+Plan
+-----
+- Hope to move all style rules (ie. app themes) to Chauvet.sass
+- Current color selection is for dark background, need to evaluate with light
+  background more.
+
 - Makefile is for some hacking, probably going to configure redo for builds
   (as alternative). But specific functions will be shell scripts as much as
   possible, and a Python helper for color-mode stuff. Latter would only be
@@ -14,27 +69,13 @@ Current focus:
 - Docs, specs. Lots of thought.
 - Some preliminary app config templates in ``tools/sh/*-e/*.tpl``...
 
-
-For further thought:
-
-- Have no ANSI mapping yet.
-
-  Instead of RGB, dircolors for example is configured by providing codes for
-  the ANSI escape sequence. So there may be some TERM/cap involved in to-be
-  written scripts, dunno.
-
-- Not every tpl is going to work from RGB colors in hex notation.
-  Better work out structure to deal with getting rgb/hex/xterm/ansi/... codes
-  from tab for different templates. Probably metadata, or modeline perhaps.
-
 - Current palette is not really adequate.
-  Need color xform tool to give daker/lighter version of colors, complement
-  etc. to get shades or variants of the current swatches. For use as GUI
-  backgrounds mostly I'd like to have some 'derived' colors.
+  Need color transform tool to give alternative versions for swatches, or
+  even use more systematic approaches to generate ranges.
 
-  Using tints, especially at the darker end, can give very different results depending on the monitor tho. Sadly I don't have any calibration.
-  Its possibly needed for users to brighten or darken the Chauvet palette or
-  rather specific app configs for them be usable at particular monitors.
+  Also, i.e. darker colors only work for users that have proper displays. For
+  run- of-the-mill office and home budget displays could want to generate
+  variant schemes that stay in "safe regions".
 
 
 Project manifest
@@ -66,7 +107,6 @@ The build process summarized in an outline of three steps:
 
 Obviously, using only shell (Bash for now) as a prerequisite rather limits the
 SASS expressions to some subset specifically formatted to be simple to parse.
-
 
 
 Rules
@@ -106,8 +146,8 @@ Its probably not a specified standard thing, but there are many instances of
 it out there. My Linux laptop has tens of copies of them, many of which are
 the same. But not all.
 
-Formatting is spaces for the RGB columns, and two tabs before the title or
-name.
+Formatting is just columns and mixed tabs and spaces. The name does not seem to
+have any spaces, but regardless parsing this is trivial.
 
 Some copies have the RGB columns padded with spaces, to nicely right-align all
 the values.
