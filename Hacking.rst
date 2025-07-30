@@ -21,7 +21,7 @@ Dependencies
 
     python3 -m venv .venv
     source .venv/bin/activate
-    pip install colormath svgwrite
+    pip install colormath svgwrite Pillow
 
 Tools
 -----
@@ -51,6 +51,11 @@ Status
   al for better metadata.
 
   Should trash Makefile as its an arcane format.
+
+- ThemeX is another tool that promises a universal highlight colorscheme
+  format. Uses a sensible YAML format. Tracking prototype with Git but have
+  been looking to generate from sass.
+
 
 Plan
 -----

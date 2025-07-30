@@ -17,6 +17,8 @@ chauvet_build_target=(
   @rgb16bit
 )
 chauvet_dist_target=(
+  @rgbtxt:chart:BunsenLabs-boron
+  @rgbtxt:chart:BunsenLabs-boron-byhex # Ordered by brightness
   @rgbtxt:chart:Chauvet
   @rgbtxt:chart:Chauvet-hsl
   @rgbtxt:chart:Tango16dark
@@ -24,8 +26,10 @@ chauvet_dist_target=(
   @rgbtxt:chart:Grayscale23
   @rgbtxt:chart:Xorg
   @rgbtxt:chart:Xterm16
+  @palettes
 )
 chauvet_rgb16bit_target=(
+  @rgb16bit:BunsenLabs-boron
   @rgb16bit:Chauvet
   @rgb16bit:Chauvet-hsl
   @rgb16bit:Tango16dark
@@ -48,6 +52,14 @@ case "${REDO_TARGET-}" in
 esac
 
 case "${REDO_TARGET-}" in
+
+( @rgbtxt:chart:BunsenLabs-boron )
+    export GRID=9,2
+  ;;
+
+( @rgbtxt:chart:BunsenLabs-boron* )
+    export GRID=3,6
+  ;;
 
 ( @rgbtxt:chart:Chauvet )
     export GRID=3,6
@@ -74,8 +86,7 @@ case "${REDO_TARGET-}" in
   ;;
 
 ( @rgbtxt:chart:Xorg )
-    export GRID=34,22 # ~ 16:10
-    #export GRID=31,24 # ~ 4:3
+    export GRID=20,38 #
     export SWATCH=120 COLS=rgbhex
     #,hls,lab
   ;;

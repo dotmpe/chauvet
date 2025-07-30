@@ -1,0 +1,26 @@
+43 69 79	BunsenBoron0	2B454F	8
+188 75 79	BunsenBoron1	BC4B4F	138
+75 188 151	BunsenBoron2	4BBC97	55
+188 123 75	BunsenBoron3	BC7B4B	145
+75 139 173	BunsenBoron4	4B8BAD	48
+188 91 75	BunsenBoron5	BC5B4B	140
+103 139 139	BunsenBoron6	678B8B	73
+175 188 201	BunsenBoron7	AFBCC9	146
+
+! RGBA at 0.9 or 90%
+30 43 46	BunsenBoronBg	1E2B2E	-7
+
+52 96 120	BunsenBoron8	346078	21
+213 79 83	BunsenBoron9	D54F53	161
+79 213 169	BunsenBoron10	4FD5A9	62
+213 136 79	BunsenBoron11	D5884F	170
+79 155 195	BunsenBoron12	4F9BC3	55
+213 106 79	BunsenBoron13	D56A4F	165
+112 155 155	BunsenBoron14	709B9B	84
+255 255 255	BunsenBoron15	FFFFFF	
+
+! Solid
+215 232 232	BunsenBoronFg	D7E8E8	190
+
+! Other colors exist in Xresources for urxvt, but those are dimmer so should
+! override that with this palette as well. bg/fg is identical.

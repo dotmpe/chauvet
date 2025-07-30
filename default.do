@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Chauvet main build file: see .env.sh for config
+
 chauvet_default_do_env ()
 {
   . "tool/bash/lib/chauvettk.lib.sh" &&
@@ -87,17 +89,20 @@ chauvet_default_do_main ()
         < "${rgbtxtupdate}" \
           OUTPUT="$D/chart/${name:?}.svg" python tool/py/cards.py &&
         < "$D/chart/${name:?}.svg" redo-stamp &&
+        convert "$D/chart/${name:?}.svg" "$D/chart/${name:?}.png" &&
         redo-ifchange "$D/chart/${name:?}.svg" tool/py/cards.py
       ;;
 
   ( @rgbtxt:data:* )
-        # Grep only color data, and sed to tsv
+        # Grep-out comment lines, and sed to tsv
         : "${1##*:}"
         local name="${_%.rgb.txt}" rgbtxtdata
         rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
         redo-ifchange "src/${name}.rgb.txt" &&
         grep -v '^\(!\|!.[^@].*\|\s*\)$' "${_}" |
         > "${rgbtxtdata:?}" sed "${CHAUVET_FIXRGB_SED}" &&
+        #chauvettk_normalize_rgbtxt_names |
+        #> "${rgbtxtdata:?}" awk '!a[$1$2$3]++' &&
         < "${rgbtxtdata:?}" redo-stamp &&
         if_ok "$(wc -l "${rgbtxtdata:?}")" &&
         >&2 echo "Palette ${name}: ${_%% *} swatches" &&
@@ -184,6 +189,22 @@ chauvet_default_do_main ()
         sassthemex="$B/sass:themex:${name}"
 				redo-ifchange "@sass:tab:${name}" &&
         < "${sasstab}" > "${sassthemex}" bash tool/bash/sass.sh typeThemex
+      ;;
+
+  ( @palettes ) # Copy palette charts
+        redo-always &&
+        >&2 mkdir -vp ~/Documents/Dev/Palettes &&
+        >&2 rsync -avzui "${D:?}/chart/" \
+          ~/Documents/Dev/Palettes &&
+        >&2 rsync -avzui "./src/" \
+          ~/Documents/Dev/Palettes
+      ;;
+
+  ( @themex )
+        >&2 themex Chauvet.themex &&
+        < Chauvet.themex/buids/sublime/chauvet256dark.tmTheme \
+          redo-stamp &&
+        redo-ifchange Chauvet.themex/theme.yml
       ;;
 
     * )
