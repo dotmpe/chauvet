@@ -1,3 +1,6 @@
 [submodule "chauvet-vim"]
 	path = chauvet-vim
 	url = git@github.com:dotmpe/chauvet-vim.git
+[submodule "chauvet-tmux"]
+	path = chauvet-tmux
+	url = git@github.com:dotmpe/chauvet-tmux.git
