@@ -106,8 +106,25 @@ case "${1:?}" in
       redo-ifchange "${rgbtxtdata:?}"
     ;;
 
-# some generic variable formats, should be easy enough to convert for
-# specific language notations
+( @rgbtxt:vars:float:scad:* )
+      : "${1##*:}"
+      declare name="${_%.rgb.txt}" rgbtxt{data,out}
+      rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
+      rgbtxtout="$D/vars/$name.rgb.scad"
+      >&2 mkdir -vp "$D/vars"
+      redo-ifchange "src/${name}.rgb.txt" &&
+      < "$rgbtxtdata" > "$rgbtxtout" awk '
+        /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+/ {
+          match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+).*/, m)
+          print m[4] " = [" m[1]/255 ", " m[2]/255 ", " m[3]/255 "];"
+          next
+        }
+      ' &&
+      redo-ifchange \
+        "@rgbtxt:data:${name}" \
+        "@rgbtxt:update:${name}" &&
+      >&2 echo "Updated ${rgbtxtout@Q}"
+    ;;
 ( @rgbtxt:vars:float:* )
       # Write as variable assignments, normalized floats, comma separated in []
       : "${1##*:}"
@@ -117,28 +134,9 @@ case "${1:?}" in
       >&2 mkdir -vp "$D/vars"
       redo-ifchange "src/${name}.rgb.txt" &&
       < "$rgbtxtdata" > "$rgbtxtvars" awk '
-        /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+	[0-9]+/ {
-          match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+)	([0-9]+)/, m)
+        /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+/ {
+          match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+).*/, m)
           print m[4] "\t" m[1]/255 "\t" m[2]/255 "\t" m[3]/255
-          next
-        }
-      ' &&
-      redo-ifchange \
-        "@rgbtxt:data:${name}" \
-        "@rgbtxt:update:${name}" &&
-      >&2 echo "Updated ${rgbtxtvars@Q}"
-    ;;
-( @rgbtxt:vars:float:scad:* )
-      : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxt{data,out}
-      rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
-      rgbtxtout="$D/vars/$name.rgb.scad"
-      >&2 mkdir -vp "$D/vars"
-      redo-ifchange "src/${name}.rgb.txt" &&
-      < "$rgbtxtdata" > "$rgbtxtvars" awk '
-        /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+	[0-9]+/ {
-          match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+)	([0-9]+)/, m)
-          print m[4] " = [" m[1]/255 ", " m[2]/255 ", " m[3]/255 "];"
           next
         }
       ' &&
@@ -156,8 +154,8 @@ case "${1:?}" in
       >&2 mkdir -vp "$D/vars"
       redo-ifchange "src/${name}.rgb.txt" &&
       < "$rgbtxtdata" > "$rgbtxtvars" awk '
-        /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+	[0-9]+/ {
-          match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+)	([0-9]+)/, m)
+        /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+/ {
+          match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+).*/, m)
           print m[4] " = (" m[1] ", " m[2] ", " m[3] ");"
           next
         }
@@ -172,12 +170,12 @@ case "${1:?}" in
       : "${1##*:}"
       declare name="${_%.rgb.txt}" rgbtxt{data,vars}
       rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
-      rgbtxtvars="$D/vars/$name.rgbtxt.vars"
+      rgbtxtvars="$D/vars/$name.rgb.names.list"
       >&2 mkdir -vp "$D/vars"
       redo-ifchange "src/${name}.rgb.txt" &&
       < "$rgbtxtdata" > "$rgbtxtvars" gawk '
-        /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+	[0-9]+/ {
-          match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+)	([0-9]+)/, m)
+        /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+/ {
+          match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+).*/, m)
           print m[4] "=" m[5]
           next
         }

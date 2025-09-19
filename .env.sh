@@ -3,6 +3,8 @@
 # NOTE: .env.sh not auto-added as prerequisite for current target, so that
 # targets can fine-tune their parameterized triggers more precisely.
 
+set -eETuo pipefail
+
 export CHAUVET_VER=0.0.1-dev
 export PYTHONPATH=tool/py
 
