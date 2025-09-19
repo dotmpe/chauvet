@@ -6,7 +6,8 @@ A bright orange color theme.
 
 These theme files use fonts patched for `Powerline extra symbols` (see `NERD fonts`_).
 
-See Hacking.rst for current development notes.
+See Hacking.rst for current development notes. To run all build targets, see the
+Tools section.
 
 .. _Powerline extra symbols: https://github.com/ryanoasis/powerline-extra-symbols
 .. _Nerd fonts: https://nerdfonts.com

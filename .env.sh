@@ -17,15 +17,15 @@ chauvet_build_target=(
   @rgb16bit
 )
 chauvet_dist_target=(
-  @rgbtxt:chart:BunsenLabs-boron
-  @rgbtxt:chart:BunsenLabs-boron-byhex # Ordered by brightness
-  @rgbtxt:chart:Chauvet
-  @rgbtxt:chart:Chauvet-hsl
-  @rgbtxt:chart:Tango16dark
-  @rgbtxt:chart:Tango
-  @rgbtxt:chart:Grayscale23
-  @rgbtxt:chart:Xorg
-  @rgbtxt:chart:Xterm16
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:BunsenLabs-boron
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:BunsenLabs-boron-byhex # Ordered by brightness
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Chauvet
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Chauvet-hsl
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Tango16dark
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Tango
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Grayscale23
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Xorg
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Xterm16
   @palettes
 )
 chauvet_rgb16bit_target=(

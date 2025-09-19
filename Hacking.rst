@@ -12,6 +12,8 @@ Objectives
 
 Dependencies
 ------------
+See requirements.apt.txt for Debian packages. Install apenwarr/redo manually.
+
 - ``pouyakary/themeX`` for tmTheme (Visual Studio/Sublime/TextMate) highlight
   template conversions::
 
@@ -25,9 +27,13 @@ Dependencies
 
 Tools
 -----
-::
+To run RGB.txt update::
 
   redo -k
+
+To generate all artefacts (palette charts, var files)::
+
+  redo -k @dist
 
 Status
 ------
