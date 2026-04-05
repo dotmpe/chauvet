@@ -24,15 +24,15 @@
 215 135 0	Orange3	D78700	171	172
 215 95 0	DarkOrange3b	D75F00	165	166
 
-255 255 215	Cornsilk1	FFFFD7	230	230	Pale beige
+255 248 220	Cornsilk1	FFF8DC	230	230	Pale beige
 255 215 0	Gold1	FFD700	219	220	Bold warm yellow
 175 95 0	DarkOrange3	AF5F00	129	130
+238 220 130	LightGoldenrod2	EEDC82	
 
 135 175 255	SkyBlue2	87AFFF	111	111
 135 135 255	LightSlateBlue	8787FF	105	105	Blue-saturated purple
 135 135 175	LightSlateGray	8787AF	103	103	Blue-green tinted medium grey
 
-215 215 135	LightGoldenrod2	D7D787	186	186
 135 175 95	DarkOliveGreen3	87AF5F	107	107
 135 135 95	Wheat4	87875F	101	101
 
