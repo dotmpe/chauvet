@@ -1,3 +1,7 @@
+"""
+More or less initial ad-hox version to read RGB.txt and convert/add some
+columns in different notations.
+"""
 import sys
 
 from chauvettk.rgbtxt import read_rgbtxt_datalines_fl, rgbtxt_autofill
@@ -63,8 +67,9 @@ if __name__ == '__main__':
             rgb_dec = tuple(rgb_hex_dec)
 
         elif not rgb_hex:
-            rgb_hex = "".join([
-                hex(v)[2:].ljust(2, '0') for v in rgb_dec]).upper()
+            rgb_hex = "".join(
+                        [hex(v)[2:].rjust(2, '0') for v in rgb_dec]
+                    ).upper()
 
         rgb_spec = " ".join(map(str, rgb_dec))
 

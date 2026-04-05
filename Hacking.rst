@@ -12,6 +12,8 @@ Objectives
 
 Dependencies
 ------------
+See requirements.apt.txt for Debian packages. Install apenwarr/redo manually.
+
 - ``pouyakary/themeX`` for tmTheme (Visual Studio/Sublime/TextMate) highlight
   template conversions::
 
@@ -21,13 +23,17 @@ Dependencies
 
     python3 -m venv .venv
     source .venv/bin/activate
-    pip install colormath svgwrite
+    pip install colormath svgwrite Pillow
 
 Tools
 -----
-::
+To run RGB.txt update::
 
   redo -k
+
+To generate all artefacts (palette charts, var files)::
+
+  redo -k @dist
 
 Status
 ------
@@ -51,6 +57,11 @@ Status
   al for better metadata.
 
   Should trash Makefile as its an arcane format.
+
+- ThemeX is another tool that promises a universal highlight colorscheme
+  format. Uses a sensible YAML format. Tracking prototype with Git but have
+  been looking to generate from sass.
+
 
 Plan
 -----
