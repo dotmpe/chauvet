@@ -1,24 +1,24 @@
-! @version: 0.0.1-dev
-! @author: .mpe
-! @name: Chauvet 256
-! @description: Bright orange
-! @baseColor: dark
-! @colorSpaceName: sRGB
-! @UUID: a2584019-ef05-4989-b06a-905edfbd1f06
+; @version: 0.0.1-dev
+; @author: .mpe
+; @name: Chauvet 256
+; @description: Bright orange
+; @baseColor: dark
+; @colorSpaceName: sRGB
+; @UUID: a2584019-ef05-4989-b06a-905edfbd1f06
 
-! Extended rgb.txt file. Normal X11 rgb.txt has r/g/b cols followed by
-! color name separated by TAB.
-!
-! Here the name field is followed by:
-! - hex notation,
-! - xterm-256 number (if applicable),
-! - comment/description
-!
-! TODO: rename colors to something more sensible?
+;; Extended rgb.txt file. Normal X11 rgb.txt has r/g/b cols followed by
+;; color name separated by TAB.
+;;
+;; Here the name field is followed by:
+;; - hex notation,
+;; - xterm-256 number (if applicable),
+;; - comment/description
+;;
+;; TODO: rename colors to something more sensible?
 
 
-! Colors between dark and light Vim colorscheme are the same except bg
-! (and some assignments in templates).
+;; Colors between dark and light Vim colorscheme are the same except bg
+;; (and some assignments in templates).
 
 255 135 0	DarkOrange	FF8700	207	208
 215 135 0	Orange3	D78700	171	172
@@ -43,4 +43,4 @@
 215 0 0	Red3	D70000	151	160
 255 95 0	OrangeRed1	FF5F00	201	202
 
-! ex:ft=lesst-txt:
+;; ex:ft=lesst-txt:

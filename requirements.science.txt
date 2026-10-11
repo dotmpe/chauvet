@@ -1,0 +1,7 @@
+# start: jupyter lab
+colour-science
+scipy
+matplotlib
+jupyterlab
+numpy
+jupytext

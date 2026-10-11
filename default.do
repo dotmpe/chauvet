@@ -6,6 +6,7 @@
 
 . "tool/bash/lib/chauvettk.lib.sh" &&
 chauvettk_lib__load &&
+# All the build target config
 . "./.env.sh" &&
 mkdir -p "${B:?Build dir expected}" "${D:?Dist dir expected}" &&
 case "${1:?}" in
@@ -63,8 +64,9 @@ case "${1:?}" in
     ;;
 
 ( @rgb16bit:* )
+: about 'Default target group for 16bit RGB palette, build all artefacts'
       : "${1##*:}"
-      declare name="${_%.rgb.txt}"
+      declare name="${_%.rgb.tsv}"
       redo-ifchange \
         "@rgbtxt:data:${name}" \
         "@rgbtxt:update:${name}" \
@@ -78,8 +80,9 @@ case "${1:?}" in
     ;;
 
 ( @rgbtxt:chart:* )
+: about 'Build tabular swatch grid (set GRID to customize)'
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxtupdate
+      declare name="${_%.rgb.tsv}" rgbtxtupdate
       rgbtxtupdate="$B/rgbtxt:update:${name:?RGB.txt filename expected}"
       redo-ifchange "@rgbtxt:update:${name}" &&
       >&2 mkdir -p "$D/chart" &&
@@ -91,11 +94,11 @@ case "${1:?}" in
     ;;
 
 ( @rgbtxt:data:* )
-      # Grep-out comment lines, and sed to TSV
+: about 'Grep-out comment lines, and sed to TSV so we can sort/compare on data'
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxtdata
+      declare name="${_%.rgb.tsv}" rgbtxtdata
       rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
-      redo-ifchange "src/${name}.rgb.txt" &&
+      redo-ifchange "src/rgbtab/${name}.rgb.tsv" &&
       grep -v '^\(!\|!.[^@].*\|\s*\)$' "${_}" |
         > "${rgbtxtdata:?}" sed "${CHAUVET_FIXRGB_SED}" &&
       #chauvettk_normalize_rgbtxt_names |
@@ -108,11 +111,11 @@ case "${1:?}" in
 
 ( @rgbtxt:vars:float:scad:* )
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxt{data,out}
+      declare name="${_%.rgb.tsv}" rgbtxt{data,out}
       rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
       rgbtxtout="$D/vars/$name.rgb.scad"
       >&2 mkdir -vp "$D/vars"
-      redo-ifchange "src/${name}.rgb.txt" &&
+      redo-ifchange "src/rgbtab/${name}.rgb.tsv" &&
       < "$rgbtxtdata" > "$rgbtxtout" awk '
         /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+/ {
           match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+).*/, m)
@@ -128,11 +131,11 @@ case "${1:?}" in
 ( @rgbtxt:vars:float:* )
       # Write as variable assignments, normalized floats, comma separated in []
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxt{data,vars}
+      declare name="${_%.rgb.tsv}" rgbtxt{data,vars}
       rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
       rgbtxtvars="$D/vars/$name.rgb.float.tsv"
       >&2 mkdir -vp "$D/vars"
-      redo-ifchange "src/${name}.rgb.txt" &&
+      redo-ifchange "src/rgbtab/${name}.rgb.tsv" &&
       < "$rgbtxtdata" > "$rgbtxtvars" awk '
         /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+/ {
           match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+).*/, m)
@@ -148,11 +151,11 @@ case "${1:?}" in
 ( @rgbtxt:vars:16bit:py:* )
       # Write as variable assignments, decimal int pairs, comma separated in ()
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxt{data,vars}
+      declare name="${_%.rgb.tsv}" rgbtxt{data,vars}
       rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
       rgbtxtvars="$D/vars/$name.rgb.py"
       >&2 mkdir -vp "$D/vars"
-      redo-ifchange "src/${name}.rgb.txt" &&
+      redo-ifchange "src/rgbtab/${name}.rgb.tsv" &&
       < "$rgbtxtdata" > "$rgbtxtvars" awk '
         /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+/ {
           match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+).*/, m)
@@ -166,13 +169,13 @@ case "${1:?}" in
       >&2 echo "Updated ${rgbtxtvars@Q}"
     ;;
 ( @rgbtxt:vars:hex:* )
-      # Write as variable assignments, in 6 hexadecimals, no prefix
+      on # Wron ite as variable assignments, in 6 hexadecimals, no prefix
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxt{data,vars}
+      declare name="${_%.rgb.tsv}" rgbtxt{data,vars}
       rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
       rgbtxtvars="$D/vars/$name.rgb.names.list"
       >&2 mkdir -vp "$D/vars"
-      redo-ifchange "src/${name}.rgb.txt" &&
+      redo-ifchange "src/rgbtab/${name}.rgb.tsv" &&
       < "$rgbtxtdata" > "$rgbtxtvars" gawk '
         /[0-9]+ [0-9]+ [0-9]+	[[:alnum:]]+	[0-9A-F]+/ {
           match($0, /([0-9]+) ([0-9]+) ([0-9]+)	([[:alnum:]]+)	([0-9A-F]+).*/, m)
@@ -190,7 +193,7 @@ case "${1:?}" in
       # Check that data lines are in sync (have HEX, XTERM columns)
       # without automatic overwrite
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxt{data,update}
+      declare name="${_%.rgb.tsv}" rgbtxt{data,update}
       rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
       rgbtxtupdate="$B/rgbtxt:update:${name}"
       redo-ifchange \
@@ -205,7 +208,7 @@ case "${1:?}" in
 
 ( @rgbtxt:sass:all:* )
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxtsassroot
+      declare name="${_%.rgb.tsv}" rgbtxtsassroot
       rgbtxtsassroot="$B/rgbtxt:sass:root:${name}"
       rgbtxtsassall="$B/rgbtxt:sass:all:${name}"
       redo-ifchange "@rgbtxt:sass:root:${name}" rules/*.sass &&
@@ -223,7 +226,7 @@ case "${1:?}" in
 
 ( @rgbtxt:sass:root:* )
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxt{update,sassroot}
+      declare name="${_%.rgb.tsv}" rgbtxt{update,sassroot}
       rgbtxtupdate="$B/rgbtxt:update:${name:?RGB.txt filename expected}"
       rgbtxtsassroot="$B/rgbtxt:sass:root:${name}"
       redo-ifchange \
@@ -234,8 +237,9 @@ case "${1:?}" in
     ;;
 
 ( @rgbtxt:update:* )
+: about 'Read ...'
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxtupdate
+      declare name="${_%.rgb.tsv}" rgbtxtupdate
       rgbtxtupdate="$B/rgbtxt:update:${name:?RGB.txt filename expected}"
       redo-ifchange "@rgbtxt:data:${name}" tool/py/rgbtxt.py &&
       < "${B}/rgbtxt:data:${name}" > "${rgbtxtupdate:?}" \
@@ -246,7 +250,7 @@ case "${1:?}" in
 
 ( @sass:shvars:* )
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxtsassall sassshvars
+      declare name="${_%.rgb.tsv}" rgbtxtsassall sassshvars
       rgbtxtsassall="$B/rgbtxt:sass:all:${name}"
       sassshvars="$B/sass:shvars:${name}"
       redo-ifchange "@rgbtxt:sass:all:${name}" &&
@@ -257,7 +261,7 @@ case "${1:?}" in
 
 ( @sass:tab:* )
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" rgbtxtsassall sasstab
+      declare name="${_%.rgb.tsv}" rgbtxtsassall sasstab
       rgbtxtsassall="$B/rgbtxt:sass:all:${name}"
       sasstab="$B/sass:tab:${name}"
       redo-ifchange "@rgbtxt:sass:all:${name}" &&
@@ -267,7 +271,7 @@ case "${1:?}" in
 
 ( @sass:themex:* )
       : "${1##*:}"
-      declare name="${_%.rgb.txt}" sass{tab,themex}
+      declare name="${_%.rgb.tsv}" sass{tab,themex}
       sasstab="$B/sass:tab:${name}"
       sassthemex="$B/sass:themex:${name}"
       redo-ifchange "@sass:tab:${name}" &&
@@ -278,9 +282,9 @@ case "${1:?}" in
       redo-always &&
       >&2 mkdir -vp ~/Documents/Dev/Palettes &&
       >&2 rsync -avzui "${D:?}/chart/" \
-        ~/Documents/Dev/Palettes &&
-      >&2 rsync -avzui "./src/" \
-        ~/Documents/Dev/Palettes
+        ~/Documents/Dev/Palettes/Charts &&
+      >&2 rsync -avzui "./src/rgbtab/" \
+        ~/Documents/Dev/Palettes/Source
     ;;
 
 ( @themex )
