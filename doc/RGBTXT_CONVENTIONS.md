@@ -1,4 +1,8 @@
-# Intro
+---
+title: rgb.txt file format conventions
+category: [conventions]
+status: draft
+---
 
 This document describes an rgb.txt file format and related TSV profiles used by the Chauvet project.
 The purpose is to have one common, readable and editable notation that is easy to compare and that can hold additional data.
@@ -26,12 +30,7 @@ The name is separated from the RGB values by two TAB characters, or follows afte
 
 There are no comments or other provisions.
 
-The main file defining colors for the local server is normally found at `/etc/X11/rgb.txt`.
-For a normal, modern and capable setup there may be hundreds or more colors defined;
-at 8 bits/channel there are over ~16.7M possible entries not including aliases.
-
-These define color as standard RGB values, and uncorrected for specific hardware or light conditions.
-Read the appendix on color spaces for more information.
+For additional notes, see [Xorg rgb.txt notes](XORG_RGBTXT.md).
 
 With additional provisions, the format should be loadable by a TSV parser.
 The profile `rgbtxt` may be used if it matches the classic X11 rgb.txt layout:
@@ -101,6 +100,9 @@ When an alpha channel is needed the above rgba profiles can hold 32 bit color de
 
 Some formats may use 3-digit hexademicals, or other and even more restricted color ranges.
 Such may be added later to the fields for the Chauvet project format.
+
+(XXX: urwid has a few nice demos of other, <8bit/ch color palettes, to see how they
+map and along with the name/index schemes for those.)
 
 ## Color space and jargon
 

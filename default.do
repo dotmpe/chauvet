@@ -2,12 +2,16 @@
 
 # Chauvet main build file: see .env.sh for config
 
+set -eETuo pipefail
+
 #[[ ! ${REDO_RUNID+set} ]]
 
 . "tool/bash/lib/chauvettk.lib.sh" &&
 chauvettk_lib__load &&
+
 # All the build target config
 . "./.env.sh" &&
+
 mkdir -p "${B:?Build dir expected}" "${D:?Dist dir expected}" &&
 case "${1:?}" in
 ( @env:* )
@@ -16,7 +20,10 @@ case "${1:?}" in
 ( * )
     redo-ifchange "@env:fun:tool/bash/lib/chauvettk.lib.sh:chauvettk_lib__load"
   ;;
-esac
+esac &&
+
+# Development target and recipe handlers
+. "./.build-select.sh" &&
 
 case "${1:?}" in
 
@@ -40,23 +47,7 @@ case "${1:?}" in
     ;;
 
 ( @dist:themex:* )
-    ;;
-
-( @env:a:* )
-      : "${1#@env:a:}"
-      if_ok "$(declare -p "${_:?Array variable name expected}")" &&
-      <<< "${_}" redo-stamp &&
-      redo-ifchange ".env.sh"
-    ;;
-
-( @env:fun:* )
-      declare fun src
-      : "${1#@env:fun:}"
-      src=${_%:*} fun="${1##*:}"
-      redo-ifchange "${src:?Expected source file path}" &&
-      . "$src" &&
-      if_ok "$(declare -f "${fun:?Expected function name}")" &&
-      <<< "${_}" redo-stamp
+      TODO
     ;;
 
 ( @rgb16bit )
@@ -104,7 +95,7 @@ case "${1:?}" in
       #chauvettk_normalize_rgbtxt_names |
       #> "${rgbtxtdata:?}" awk '!a[$1$2$3]++' &&
       < "${rgbtxtdata:?}" redo-stamp &&
-      if_ok "$(wc -l "${rgbtxtdata:?}")" &&
+      if_ok "$(grep -cv '^-' "${rgbtxtdata:?}")" &&
       >&2 echo "Palette ${name}: ${_%% *} swatches" &&
       redo-ifchange "${rgbtxtdata:?}"
     ;;
@@ -168,8 +159,10 @@ case "${1:?}" in
         "@rgbtxt:update:${name}" &&
       >&2 echo "Updated ${rgbtxtvars@Q}"
     ;;
+
 ( @rgbtxt:vars:hex:* )
-      on # Wron ite as variable assignments, in 6 hexadecimals, no prefix
+: about 'Write as variable assignments, in 6 hexadecimals, no prefix'
+
       : "${1##*:}"
       declare name="${_%.rgb.tsv}" rgbtxt{data,vars}
       rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
@@ -190,8 +183,8 @@ case "${1:?}" in
     ;;
 
 ( @rgbtxt:diff:* )
-      # Check that data lines are in sync (have HEX, XTERM columns)
-      # without automatic overwrite
+: about 'Check that data lines are in sync (have HEX, XTERM columns) without automatic overwrite'
+
       : "${1##*:}"
       declare name="${_%.rgb.tsv}" rgbtxt{data,update}
       rgbtxtdata="$B/rgbtxt:data:${name:?RGB.txt filename expected}"
@@ -204,40 +197,12 @@ case "${1:?}" in
 
 ( @rgbtxt::all:* )
       : "${1##*:}"
-    ;;
-
-( @rgbtxt:sass:all:* )
-      : "${1##*:}"
-      declare name="${_%.rgb.tsv}" rgbtxtsassroot
-      rgbtxtsassroot="$B/rgbtxt:sass:root:${name}"
-      rgbtxtsassall="$B/rgbtxt:sass:all:${name}"
-      redo-ifchange "@rgbtxt:sass:root:${name}" rules/*.sass &&
-      {
-        cat "${rgbtxtsassroot}" &&
-        for ruleset in rules/*.sass
-        do
-          echo "// Source: $ruleset"
-          cat "${ruleset}"
-        done &&
-        echo "// ${name}.sass ex:ft=sass:"
-      } > "${rgbtxtsassall}" &&
-      < "${rgbtxtsassall}" redo-stamp
-    ;;
-
-( @rgbtxt:sass:root:* )
-      : "${1##*:}"
-      declare name="${_%.rgb.tsv}" rgbtxt{update,sassroot}
-      rgbtxtupdate="$B/rgbtxt:update:${name:?RGB.txt filename expected}"
-      rgbtxtsassroot="$B/rgbtxt:sass:root:${name}"
-      redo-ifchange \
-        "@rgbtxt:update:${name}" @env:fun:tool/bash/rgb.sh:writeSass &&
-      < "${rgbtxtupdate}" > "${rgbtxtsassroot}" \
-      bash tool/bash/rgb.sh writeSass &&
-      < "${rgbtxtsassroot}" redo-stamp
+      TODO
     ;;
 
 ( @rgbtxt:update:* )
 : about 'Read ...'
+
       : "${1##*:}"
       declare name="${_%.rgb.tsv}" rgbtxtupdate
       rgbtxtupdate="$B/rgbtxt:update:${name:?RGB.txt filename expected}"
@@ -246,52 +211,6 @@ case "${1:?}" in
         python tool/py/rgbtxt.py - &&
       < "${rgbtxtupdate:?}" redo-stamp &&
       redo-ifchange "${rgbtxtupdate:?}"
-    ;;
-
-( @sass:shvars:* )
-      : "${1##*:}"
-      declare name="${_%.rgb.tsv}" rgbtxtsassall sassshvars
-      rgbtxtsassall="$B/rgbtxt:sass:all:${name}"
-      sassshvars="$B/sass:shvars:${name}"
-      redo-ifchange "@rgbtxt:sass:all:${name}" &&
-      < "${rgbtxtsassall}" \
-      > "${sassshvars}" \
-        bash tool/bash/sass.sh readShSimpleVars
-    ;;
-
-( @sass:tab:* )
-      : "${1##*:}"
-      declare name="${_%.rgb.tsv}" rgbtxtsassall sasstab
-      rgbtxtsassall="$B/rgbtxt:sass:all:${name}"
-      sasstab="$B/sass:tab:${name}"
-      redo-ifchange "@rgbtxt:sass:all:${name}" &&
-      < "${rgbtxtsassall}" > "${sasstab}" \
-        sass_quiet=1 bash tool/bash/sass.sh readTab
-    ;;
-
-( @sass:themex:* )
-      : "${1##*:}"
-      declare name="${_%.rgb.tsv}" sass{tab,themex}
-      sasstab="$B/sass:tab:${name}"
-      sassthemex="$B/sass:themex:${name}"
-      redo-ifchange "@sass:tab:${name}" &&
-      < "${sasstab}" > "${sassthemex}" bash tool/bash/sass.sh typeThemex
-    ;;
-
-( @palettes ) # Copy palette charts
-      redo-always &&
-      >&2 mkdir -vp ~/Documents/Dev/Palettes &&
-      >&2 rsync -avzui "${D:?}/chart/" \
-        ~/Documents/Dev/Palettes/Charts &&
-      >&2 rsync -avzui "./src/rgbtab/" \
-        ~/Documents/Dev/Palettes/Source
-    ;;
-
-( @themex )
-      >&2 themex Chauvet.themex &&
-      < Chauvet.themex/buids/sublime/chauvet256dark.tmTheme \
-        redo-stamp &&
-      redo-ifchange Chauvet.themex/theme.yml
     ;;
 
   * )

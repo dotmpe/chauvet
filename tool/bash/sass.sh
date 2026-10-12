@@ -5,6 +5,10 @@
 
 ## Utils and global vars for parser
 
+if [[ ${VERBOSE:-0} -ne 0 && ${DEBUG:-0} -ne 0 ]]; then
+  : "${sass_quiet:=1}"
+fi
+
 ci=
 s=
 is=
@@ -129,10 +133,11 @@ evalHere () # ~ [<Sh-Tpl> [<Tab-File>]] # The simplest way to use a tab file as 
 	} || {
 	  # Some hardcoded, 'named' formats for output
 		case "${1:-sh}" in
-			( sh ) readShSimpleVars < "$2" | eval"${tpl_type:-Echo}"ShTpl ;;
-			( tab ) eval"${tpl_type:-Echo}"ShTpl < "$2" ;;
+			( sh ) readShSimpleVars < "$2" | "eval${tpl_type:-Echo}ShTpl" ;;
+			( tab ) "eval${tpl_type:-Echo}ShTpl" < "$2" ;;
 
-			( * ) echo "No such tab conversion format '${1:-}'" >&2; return 63 ;;
+			( * ) echo "No such tab conversion format '${1:-}'" >&2
+			  return 63
 		esac
 	}
 }

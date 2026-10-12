@@ -2,12 +2,12 @@ Chauvet theme files
 ===================
 :Created: 2022-03-30
 
-A bright orange color theme.
+A theme around bright orange, and project for working with colors.
 
-These theme files use fonts patched for `Powerline extra symbols` (see `NERD fonts`_).
+Note: some of the files may use fonts patched for `Powerline extra symbols` (see `NERD fonts`_).
 
 See Hacking.rst for current development notes. To run all build targets, see the
-Tools section.
+Tools section there. Very much a work in progress.
 
 .. _Powerline extra symbols: https://github.com/ryanoasis/powerline-extra-symbols
 .. _Nerd fonts: https://nerdfonts.com

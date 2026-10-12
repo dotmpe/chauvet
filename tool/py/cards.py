@@ -18,11 +18,11 @@ def fstr(template):
 
 title_h = 28
 cols, rows = map(int, os.getenv('GRID', '4,6').split(','))
-swatch = int(os.getenv('SWATCH', 120))
-w = int(os.getenv('WIDTH', cols * swatch))
-h = int(os.getenv('HEIGHT', title_h + (rows * swatch)))
+swatch_size = int(os.getenv('SWATCH', 120))
+w = int(os.getenv('WIDTH', cols * swatch_size))
+h = int(os.getenv('HEIGHT', title_h + (rows * swatch_size)))
 
-row_height = swatch
+row_height = swatch_size
 
 padd = int(os.getenv('PAGE_PADDING', 5))
 swatch_padding = 8
@@ -52,7 +52,11 @@ else:
 
 datain = sys.stdin
 palette = read_rgbtxt_tsv_dict_fl(datain)
-count = len(palette)
+blank_swatches = 0
+for swatch in palette:
+    if swatch['rgb_16bit'] is None:
+        blank_swatches += 1
+count = len(palette) - blank_swatches
 label = os.getenv('LABEL', None)
 if not label:
     title = fstr(os.getenv('TITLE_FMT', "Palette {outname}"))
@@ -70,7 +74,7 @@ dwg.add(dwg.text(label, insert=(padd, padd+20), **title_attr))
 
 col, row = 0, 0
 for color in palette:
-    x = padd + (col * swatch)
+    x = padd + (col * swatch_size)
     y = padd + title_h + (row * row_height)
 
     if color['rgb_16bit']:
@@ -93,7 +97,7 @@ for color in palette:
         num2_attr['fill'] = fg
 
         # Draw swatch
-        dwg.add(dwg.rect((x, y), (swatch, swatch), fill='#'+color['rgb_hex']))
+        dwg.add(dwg.rect((x, y), (swatch_size, swatch_size), fill='#'+color['rgb_hex']))
         x += swatch_padding
         y += swatch_padding + pt12_h
 

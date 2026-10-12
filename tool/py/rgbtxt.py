@@ -57,9 +57,9 @@ if __name__ == '__main__':
         if rgb_dec and rgb_hex:
             for i in (0, 1, 2):
                 if rgb_hex_dec[i] != rgb_dec[i]:
-                    print("RGB mismatch: %s %i <> %i" % ("RGB"[i],
+                    print("RGB mismatch: %s %i <> %i (for %s)" % ("RGB"[i],
                                                          rgb_hex_dec[i],
-                                                         rgb_dec[i]),
+                                                         rgb_dec[i], name),
                           file=sys.stderr)
                     raise ValueError()
 
