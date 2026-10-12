@@ -26,6 +26,7 @@ chauvet_dist_target=(
   @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Chauvet-hsl
   @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Grayscale23
   @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Nord
+  @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Solarized
   @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Tango
   @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Tango16dark
   @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Xorg
@@ -38,6 +39,7 @@ chauvet_rgb16bit_target=(
   @rgb16bit:Chauvet-hsl
   @rgb16bit:Grayscale23
   @rgb16bit:Nord
+  @rgb16bit:Solarized
   @rgb16bit:Tango
   @rgb16bit:Tango16dark
   @rgb16bit:Xorg
@@ -64,12 +66,15 @@ case "${REDO_TARGET-}" in
 ( @rgbtxt:chart:Chauvet-hsl )        export GRID=3,6 ;;
 ( @rgbtxt:chart:Grayscale23 )        export GRID=6,4 ;;
 ( @rgbtxt:chart:Nord )               export GRID=5,4 ;;
-( @rgbtxt:chart:Tango16dark )        export GRID=8,2 ;;
+
+( @rgbtxt:chart:Solarized* )         export GRID=8,2 ;;
 ( @rgbtxt:chart:Tango )              export GRID=6,5 ;;
+( @rgbtxt:chart:Tango16dark )        export GRID=8,2 ;;
 ( @rgbtxt:chart:Xterm16 )            export GRID=8,2 ;;
 
 ( @rgbtxt:chart:Xorg )
-    export GRID=20,38 #
+    # export GRID=20,38 #
+    export GRID=20,29 #
     export SWATCH=120 COLS=rgbhex
     #,hls,lab
   ;;

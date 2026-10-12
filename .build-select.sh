@@ -59,9 +59,11 @@ case "${1:?}" in
         # TODO: if VERBOSE/DEBUG/DIAG vflag=v and vflag=vu
         # TODO: only if INIT, mkdir; also clear dir of known files for INIT or DIAG
         >&2 mkdir -vp "${PALETTE_DIR:?}"/{Charts-{bitmap,vector},Source} &&
-        >&2 rsync -azvui --include-pattern '*.png' "${D:?}/chart/" "${PALETTE_DIR}"/Charts-bitmap &&
-        >&2 rsync -azvui --include-pattern '*.svg' "${D:?}/chart/" "${PALETTE_DIR}"/Charts-vector &&
-        >&2 rsync -azvui "./src/rgbtab/" "${PALETTE_DIR}"/Source || exit
+        >&2 rsync -azvui --include '*.png' "${D:?}/chart/" "${PALETTE_DIR}"/Charts-bitmap &&
+        >&2 rsync -azvui --include '*.svg' "${D:?}/chart/" "${PALETTE_DIR}"/Charts-vector &&
+        >&2 rsync -azvui "./src/rgbtab/" "${PALETTE_DIR}"/Source
+
+        exit
       else
         >&2 echo "No PALETTE_DIR setting"
         exit 1
