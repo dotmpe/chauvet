@@ -1,0 +1,4 @@
+(A) 2026-10-12 - TODO: structured features and environments @build @dev \
+
+  Start working on a more structured approach to track feature and environment as orthogonal trees with histories (ie. branches), and specific editions and versions (tags).
+  This starts with tracking TODO and making cross-project indices.

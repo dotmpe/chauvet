@@ -1,0 +1,37 @@
+# @version: 2.0.0
+# @author: Arctic Ice Studio (nordtheme.com)
+# @name: Nord
+# @description: An arctic, north-bluish color palette
+# @baseColor: dark
+# @colorSpaceName: sRGB
+
+; Polar Night (darkest backgrounds)
+46 52 64	nord0	2E3440	8
+59 66 82	nord1	3B4252	20
+67 76 94	nord2	434C5E	29
+76 86 106	nord3	4C566A	39
+
+-
+
+; Snow Storm (lightest foregrounds)
+216 222 233	nord4	D8DEE9	189
+229 233 240	nord5	E5E9F0	202
+236 239 244	nord6	ECEFF4	209
+
+-
+-
+
+; Frost (blue/cyan accents)
+143 188 187	nord7	8FBCBB	117
+136 192 208	nord8	88C0D0	111
+129 161 193	nord9	81A1C1	100
+81 129 172	nord10	5181AC	52
+
+-
+
+; Aurora (warm accents)
+191 97 106	nord11	BF616A	145
+208 135 112	nord12	D08770	166
+235 203 139	nord13	EBCB8B	202
+163 190 140	nord14	A3BE8C	135
+180 142 173	nord15	B48EAD	143

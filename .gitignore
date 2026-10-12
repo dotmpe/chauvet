@@ -1,3 +1,5 @@
 .chauvet
 .redo
 __pycache__
+*.ipynb
+dist/

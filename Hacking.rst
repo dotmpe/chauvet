@@ -1,14 +1,9 @@
 Dev notes
 =========
 
-Goal: make color theming more easy.
+Both Vim and Tmux repos are out of date, and much work is to do on this project.
 
-Objectives
-----------
-- I/O with common formats:
-
-  - X11 rgb.txt file
-  - TextMate support (and Sublime and other editors)
+rgb.txt reading and SVG/PNG renders are somewhat working, mostly.
 
 Dependencies
 ------------
@@ -35,33 +30,35 @@ To generate all artefacts (palette charts, var files)::
 
   redo -k @dist
 
+To add parallelization add redo option ``-j<cores>``, where cores is the number of logical CPU available.
+Use the ``nproc`` command or the equivalent ``grep -c ^processor /proc/cpuinfo`` to provide a cores value.
+
 Status
 ------
-- sass.sh was never complete/bugfree. So need to review current setup for
-  output templates as well, and there is no real dist.
+- Current Chauvet is a selection from such X11 color set. Want to plot colors on
+  diagrams (ie. LAB or HSV or whatever seems/feels suitable) and then select
+  Chauvet colors in a more systematic way later. Current selection doesnt match
+  perfectly to my liking and feels a bit awkward at times.
 
-- Using RGB tab-separated files to group schemes. Not exactly like X11 rgb.txt
-  that uses whitespace for column formatting but pre-processing that is easy
-  enough.
+- Still would like to use a SASS inspired rule set.
 
-- Current Chauvet is a selection from such X11 color set. Want to plot colors
-  on diagrams (ie. LAB) and then select Chauvet colors in a more systematic way
-  later. Current selection doesnt match perfectly to my liking and feels a bit
-  awkward at times.
+  Need to map variables to properties in different structres efficiently,
+  and SASS (normally used for CSS ie. DOM style attributes) seems like a good
+  fit.
 
-- SASS tools are bit of an experimental hack (shell processing) bc I wanted
-  minimal deps at first, or in the basis.
+  SASS tooling was a bit of an experimental hack to have minimal deps at first, or in the basis. Instead of pulling in NodeJS/NPM, or finding and selecting a Python toolchain, just Bash would make the project work for the most basic CI/dev or source deployments.
 
-- Initial redo setup is still simple, but applying parameters could use some
-  rule system as well. Something to keep in mind when looking at SASS/YAML et
-  al for better metadata.
+  But sass.sh was never complete/bugfree. So need to review current setup, and for output templates as well.
 
-  Should trash Makefile as its an arcane format.
+- Initial redo setup is still simple, but applying parameters could use some rule system as well.
+  See other work in +User-Scripts suite.
+
+  XXX: Should trash Makefile as its an arcane format, but it documents some old,
+  stale but unconsolidated recipes and work still
 
 - ThemeX is another tool that promises a universal highlight colorscheme
   format. Uses a sensible YAML format. Tracking prototype with Git but have
   been looking to generate from sass.
-
 
 Plan
 -----
@@ -69,15 +66,11 @@ Plan
 - Current color selection is for dark background, need to evaluate with light
   background more.
 
-- Makefile is for some hacking, probably going to configure redo for builds
-  (as alternative). But specific functions will be shell scripts as much as
-  possible, and a Python helper for color-mode stuff. Latter would only be
-  required for development, new themes and variations on them.
-
 Current focus:
 
-- Hacking on sass.sh and experimenting with sh templates to use
-- Docs, specs. Lots of thought.
+- Keeping as much of the redo build working, while integrating with
+  better scripts from upstream and adding features.
+
 - Some preliminary app config templates in ``tools/sh/*-e/*.tpl``...
 
 - Current palette is not really adequate.
@@ -146,37 +139,6 @@ It was the only/most well-defined standard I could find.
 Settings is there because I may want to allow further run-time configuration
 of a theme, basing that on this part of the rules. But I'm not sure yet.
 
-Formats
--------
-
-Extended rgb.txt
-________________
-An X11 rgb.txt file has three columns with 0-255 values for R, G and B,
-followed by a name or color number as ID.
-Its probably not a specified standard thing, but there are many instances of
-it out there. My Linux laptop has tens of copies of them, many of which are
-the same. But not all.
-
-Formatting is just columns and mixed tabs and spaces. The name does not seem to
-have any spaces, but regardless parsing this is trivial.
-
-Some copies have the RGB columns padded with spaces, to nicely right-align all
-the values.
-(None of them use 0-padding to fill them out.)
-
-Often lines are duplicated, only to provide for different notations of names.
-Like 'medium spring green' and 'mediumSpringGreen' for example.
-
-Comments appear both as '! ' and '#' prefixed lines.
-
-FIXME: rgbtxt.py docs.
-This project uses a derived format with single tab separators,
-and additional columns for easy lookups.
-
-- First new column is hex notation, like used in web standards
-- XXX: The second will probably be the corresponding Xterm color number,
-  if it matches one of xterms 256 colors palette.
-  Or maybe something near it? I've also been looking at urwid notations.
 
 Templates
 _________

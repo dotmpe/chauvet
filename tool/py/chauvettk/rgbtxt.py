@@ -9,6 +9,8 @@ CHAUVET_RGBTXT_COLS = [
 
 wsc_rex = re.compile(r'\W+')
 
+lcc = '!', ';', '#'
+
 
 def rgbtxt_autofill():
     pass
@@ -22,10 +24,10 @@ def read_rgbtxt_datalines_fl(datain, keep_comments=False):
     ln = 0
     for line in datain.readlines():
         ln += 1
-        if not len(line.strip()) or line[0] == '!':
-            if line[0] == '!' and keep_comments:
+        if not len(line.strip()) or line[0] in lcc:
+            if line[0] in lcc and keep_comments:
                 palette.append(line.strip())
-                continue
+            continue
         cols = line.rstrip().split('\t')
         if len(cols) > 2 and not cols[1]:
             del cols[1]
@@ -37,7 +39,7 @@ def read_rgbtxt_datalines_fl(datain, keep_comments=False):
             try:
                 rgb = tuple(map(int, rgb_spec.split(' ')))
             except ValueError as e:
-                print("Error on line %i" % ln, file=sys.stderr)
+                print(f"Error on line {ln}, value '{rgb_spec}'", file=sys.stderr)
                 raise e
         palette.append((rgb,)+tuple(cols[1:]))
     return palette
@@ -53,7 +55,7 @@ def read_rgbtxt_tsv_dict_fl(datain):
     reader = csv.DictReader(datain, fieldnames=CHAUVET_RGBTXT_COLS,
                             delimiter='\t', skipinitialspace=True)
     for row in reader:
-        if len(row['rgb_16bit']) and row['rgb_16bit'][0] in ('!', '#'):
+        if len(row['rgb_16bit']) and row['rgb_16bit'][0] in lcc:
             continue
         rgb_spec = row['rgb_16bit']
         if rgb_spec[0] == '-':

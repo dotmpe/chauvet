@@ -4,7 +4,7 @@ columns in different notations.
 """
 import sys
 
-from chauvettk.rgbtxt import read_rgbtxt_datalines_fl, rgbtxt_autofill
+from chauvettk.rgbtxt import lcc, read_rgbtxt_datalines_fl, rgbtxt_autofill
 
 
 def is_greyshade(r, g, b):
@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     data = read_rgbtxt_datalines_fl(datain, keep_comments=True)
     for fields in data:
-        if len(fields) and fields[0] and fields[0] == '!':
+        if len(fields) and fields[0] and fields[0] in lcc:
             print(fields)
             continue
 
@@ -57,9 +57,9 @@ if __name__ == '__main__':
         if rgb_dec and rgb_hex:
             for i in (0, 1, 2):
                 if rgb_hex_dec[i] != rgb_dec[i]:
-                    print("RGB mismatch: %s %i <> %i" % ("RGB"[i],
+                    print("RGB mismatch: %s %i <> %i (for %s)" % ("RGB"[i],
                                                          rgb_hex_dec[i],
-                                                         rgb_dec[i]),
+                                                         rgb_dec[i], name),
                           file=sys.stderr)
                     raise ValueError()
 

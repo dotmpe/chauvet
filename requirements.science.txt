@@ -1,0 +1,7 @@
+# start: jupyter lab --notebook-dir=notebook
+colour-science
+scipy
+matplotlib
+jupyterlab
+numpy
+jupytext

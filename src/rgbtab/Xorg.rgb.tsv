@@ -1,5 +1,5 @@
-! Derived from $Xorg: rgb.txt,v 1.3 2000/08/17 19:54:00 cpqbld Exp $
-! Removed irregular whitespace
+;; Derived from $Xorg: rgb.txt,v 1.3 2000/08/17 19:54:00 cpqbld Exp $
+;; Removed irregular whitespace
 248 248 255	GhostWhite	F8F8FF	222
 245 245 245	WhiteSmoke	F5F5F5	
 220 220 220	Gainsboro	DCDCDC	

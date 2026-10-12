@@ -1,6 +1,6 @@
 
-! 24-step greyscale gradient
-! TODO: Check for (linear) stepsize?
+;; 24-step greyscale gradient
+;; TODO: Check for (linear) stepsize?
 
 -
 8 8 8	Grey3	080808		232
@@ -26,5 +26,4 @@
 218 218 218	Grey85	DADADA		253
 228 228 228	Grey89	E4E4E4		254
 238 238 238	Grey93	EEEEEE		255
-! 255 255 255	White	FFFFFF		231
-
+; 255 255 255	White	FFFFFF		231
