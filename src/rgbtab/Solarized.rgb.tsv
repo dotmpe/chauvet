@@ -1,6 +1,6 @@
-! Solarized RGB, ordered by for 2x8 terminal palette (dark bg)
+; Solarized RGB, ordered by for 2x8 terminal palette (dark bg)
 
-7  54  66	base02	073642 
+   7  54  66	base02	073642 
  220  50  47	red	dc322f 
  133 153   0	green	859900 
  181 137   0	yellow	b58900 

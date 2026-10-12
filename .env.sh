@@ -66,15 +66,14 @@ case "${REDO_TARGET-}" in
 ( @rgbtxt:chart:Chauvet-hsl )        export GRID=3,6 ;;
 ( @rgbtxt:chart:Grayscale23 )        export GRID=6,4 ;;
 ( @rgbtxt:chart:Nord )               export GRID=5,4 ;;
-
 ( @rgbtxt:chart:Solarized* )         export GRID=8,2 ;;
 ( @rgbtxt:chart:Tango )              export GRID=6,5 ;;
 ( @rgbtxt:chart:Tango16dark )        export GRID=8,2 ;;
 ( @rgbtxt:chart:Xterm16 )            export GRID=8,2 ;;
 
 ( @rgbtxt:chart:Xorg )
-    # export GRID=20,38 #
-    export GRID=20,29 #
+    export GRID=20,38 #
+    #export GRID=20,29 #
     export SWATCH=120 COLS=rgbhex
     #,hls,lab
   ;;
