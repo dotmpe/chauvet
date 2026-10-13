@@ -6,8 +6,8 @@ chauvettk_lib__load ()
   CHAUVET_FIXRGB_SED='s/^\s*\([0-9][0-9]*\)\s*\([0-9][0-9]*\)\s*\([0-9][0-9]*\)\s*\([^\s]*\)/\1 \2 \3	\4/g'
   # normalize name to camelcase
 
-  export B=${B:-.chauvet/build}
-  export D=${D:-.chauvet/dist}
+  export B=${B:-.local/build/chauvet}
+  export D=${D:-.local/dist/chauvet}
 }
 
 chauvettk_normalize_rgbtxt_names ()

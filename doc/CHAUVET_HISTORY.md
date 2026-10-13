@@ -3,10 +3,10 @@
 [2022-02-19] Started an earthy/mossy theme but with some bold (yellow and blue)
 for accents.
 
-Inspired by muted colors of Vim themes like desert, but combined with accents
-like the bold green of Mustang (that comes with Powerline configurations), but
-using an alternative palette of accents around yellow-amber and blue-purple
-instead of green.
+Inspired by the muted color selection of Vim themes such as desert but combined
+with bold accents like Mustang's green (that comes with Powerline
+configurations), except using an alternative set accents around yellow-amber and
+blue-purple instead of Mustans' light fluorescent green.
 
 The name Chauvet itself is intended to hearken back to the caves of Chauvet, a
 protected (and elsewhere replicated) place in France where many of the most
@@ -15,7 +15,7 @@ hundred of drawings depicting scenes of many animals, and as seen and drawn by
 the Aurignacian (32-30kya) and Gravettian (27-25kya) era people. [WP 2026]
 
 The 'Chauvet steppe wisent' is among if not the most copied and recognizable
-ancient cave painting.
+ancient cave paintings.
 
 [2022-05-22] Started parent project to the Vim theme, and a separate project for
 tmux. Intend to move more into science and as well cross-format/app themeing in

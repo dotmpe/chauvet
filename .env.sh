@@ -9,9 +9,6 @@ export PYTHONPATH=tool/py
 # This has a subdir Charts and Source, for a copy made and updated during redo @palettes
 export PALETTE_DIR=$HOME/Documents/Dev/Palettes
 
-if_ok () { return; } # pass back last status
-declare -fx if_ok
-
 chauvet_all_target=(
   @build
   @check
@@ -33,6 +30,24 @@ chauvet_dist_target=(
   @rgbtxt:{chart,vars:{float{,:scad},16bit:py,hex}}:Xterm16
   @palettes
 )
+
+chauvet_dist_themex_recipe_target_printf=(
+)
+
+chauvet_rgb16bit_recipe_target_printf=(
+  "@rgbtxt:data:%s"
+  "@rgbtxt:update:%s"
+  "@rgbtxt:diff:%s"
+
+  #"@rgbtxt:sass:root:%s"
+  #"@rgbtxt:sass:all:%s"
+  #"@rgbtxt:chart:%s"
+  #"@sass:shvars:%s"
+  #"@sass:tab:%s"
+
+  #"@sass:themex:%s"
+)
+
 chauvet_rgb16bit_target=(
   @rgb16bit:BunsenLabs-boron
   @rgb16bit:Chauvet

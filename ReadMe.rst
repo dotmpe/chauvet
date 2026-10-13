@@ -2,7 +2,7 @@ Chauvet theme files
 ===================
 :Created: 2022-03-30
 
-A theme around bright orange, and project for working with colors.
+A color theme theme with bright orange, and project for working with colors.
 
 Note: some of the files may use fonts patched for `Powerline extra symbols` (see `NERD fonts`_).
 
