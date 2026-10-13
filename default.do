@@ -18,15 +18,9 @@ default_do_env() {
   ! (($#)) || return ${_E_GAE:?}
 
   # XREDO_LOCAL=.local/config/build_redo.local.bash
-  . "tool/bash/inc/usertools-core.sh" &&
-  . "tool/bash/inc/userlocal-core.sh" &&
-  . "tool/bash/inc/usertools-common.sh" &&
-  . "tool/bash/inc/usertools-say.sh" &&
-  . "tool/bash/inc/usertools-build.sh" &&
-  . "tool/bash/lib/chauvettk.lib.sh" &&
-  chauvettk_lib__load && :say-dsl && :common-dsl &&
-  . "${U_S:?}/tool/local/common_env.bash" &&
-
+  \builtin . "tool/bash/lib/chauvettk.lib.sh"
+  chauvettk_lib__load &&
+  chauvettk_lib__init &&
   : || { local stat=$?
     >&2 "Chauvet build env load failure E$stat"
     return ${stat}

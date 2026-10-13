@@ -1,5 +1,5 @@
 ; Solarized RGB, ordered by for 2x8 terminal palette (dark bg)
-
+rgb16bit	name	hex	xi
    7  54  66	base02	073642	-27
  220  50  47	red	DC322F	164
  133 153   0	green	859900	99
